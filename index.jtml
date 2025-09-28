@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>DRYPRAXSTUDIOS — Loja</title>
+  <link rel="icon" href="favicon.ico" />
+  <meta name="theme-color" content="#0f172a" />
+  <style>
+    :root{
+      --bg:#060712;
+      --card-bg: rgba(255,255,255,0.03);
+      --glass: rgba(255,255,255,0.04);
+      --neon1: #ff4db8; /* rosa */
+      --neon2: #2ee7f0; /* ciano */
+      --accent-grad: linear-gradient(135deg, var(--neon1), var(--neon2));
+      --radius: 18px;
+      --gap: 18px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background:
+      radial-gradient(1000px 600px at 10% 10%, rgba(46,231,240,0.06), transparent 8%),
+      radial-gradient(900px 500px at 90% 90%, rgba(255,77,184,0.05), transparent 12%),
+      var(--bg);
+      color:#e6edf3;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+    .page{
+      max-width:1100px;margin:28px auto;padding:28px;
+      display:grid;grid-template-columns:1fr;gap:28px;
+    }
+
+    /* header */
+    header{
+      display:flex;gap:16px;align-items:center;
+    }
+    .logo{
+      display:flex;align-items:center;gap:12px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      padding:10px;border-radius:14px;
+      box-shadow: 0 6px 30px rgba(46,231,240,0.03), inset 0 -2px 8px rgba(0,0,0,0.4);
+    }
+    .logo img{width:56px;height:56px;object-fit:contain;border-radius:10px;}
+    .brand{
+      display:flex;flex-direction:column;line-height:1;
+    }
+    .brand h1{
+      margin:0;font-size:20px;
+      background: -webkit-linear-gradient(90deg,var(--neon1),var(--neon2));
+      -webkit-background-clip: text; color: transparent;
+      letter-spacing:0.6px;
+    }
+    .brand p{margin:0;font-size:12px;color:rgba(230,237,243,0.65)}
+
+    /* hero */
+    .hero{
+      display:flex;gap:20px;align-items:center;justify-content:space-between;
+      padding:18px;border-radius:14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.005));
+      border: 1px solid rgba(255,255,255,0.03);
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+    }
+    .hero-left h2{
+      margin:0;font-size:22px;
+      background: linear-gradient(90deg,var(--neon1),var(--neon2));
+      -webkit-background-clip:text;color:transparent;
+    }
+    .hero-left p{margin:8px 0 0 0;color:rgba(230,237,243,0.75)}
+    .cta{
+      display:flex;gap:10px;align-items:center;
+    }
+    .btn{
+      padding:10px 14px;border-radius:12px;border:none;cursor:pointer;font-weight:600;
+      background: var(--accent-grad); color: #041018; box-shadow: 0 6px 26px rgba(46,231,240,0.08);
+    }
+
+    /* prices grid */
+    .prices{
+      display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:var(--gap);
+    }
+    .price-card{
+      padding:18px;border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border: 1px solid rgba(255,255,255,0.03);
+      position:relative;overflow:hidden;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease;
+      display:flex;flex-direction:column;gap:12px;
+    }
+    .price-card:hover{ transform:translateY(-6px); box-shadow: 0 18px 40px rgba(46,231,240,0.06); }
+    .price-top{
+      display:flex;align-items:center;gap:12px;
+    }
+    .price-badge{
+      font-size:20px;font-weight:800;padding:10px 14px;border-radius:12px;
+      background: linear-gradient(90deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));
+      color:transparent;background-clip:text;-webkit-background-clip:text;
+      background-image: linear-gradient(90deg,var(--neon1),var(--neon2));
+    }
+    .price-desc{font-size:13px;color:rgba(230,237,243,0.75)}
+    .price-body{font-size:14px;color:rgba(230,237,243,0.85)}
+    .price-actions{display:flex;gap:10px;margin-top:auto;align-items:center}
+    .buy-wp{
+      display:inline-flex;align-items:center;gap:8px;padding:10px;border-radius:12px;border:none;
+      cursor:pointer;background: rgba(255,255,255,0.02);color:inherit;font-weight:700;
+      border:1px solid rgba(255,255,255,0.04);
+    }
+    .buy-wp img{width:20px;height:20px;object-fit:contain}
+
+    /* catalog */
+    .catalog{
+      padding:16px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);
+      border:1px solid rgba(255,255,255,0.03);
+    }
+    .catalog h3{
+      margin:0;font-size:18px;
+      background: linear-gradient(90deg,var(--neon1),var(--neon2));
+      -webkit-background-clip:text;color:transparent;
+    }
+    .catalog-grid{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+    .site-btn{
+      display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:12px;
+      cursor:pointer;border:1px solid rgba(255,255,255,0.03);background:var(--glass);
+      min-width:220px;text-decoration:none;color:inherit;
+    }
+    .site-btn img{width:20px;height:20px;border-radius:4px;object-fit:contain}
+    .site-meta{display:flex;flex-direction:column;text-align:left}
+    .site-meta small{color:rgba(230,237,243,0.6);font-size:12px}
+
+    /* ads link */
+    .ads-link{
+      display:inline-block;margin-top:8px;padding:8px 12px;border-radius:10px;
+      border:1px dashed rgba(255,255,255,0.04);
+      font-size:13px;color:rgba(230,237,243,0.8);
+    }
+
+    /* footer */
+    footer{font-size:12px;color:rgba(230,237,243,0.6);text-align:center;padding:18px}
+    @media (max-width:600px){
+      .hero{flex-direction:column;align-items:flex-start}
+      header{flex-direction:column;align-items:flex-start;gap:12px}
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <header>
+      <div class="logo">
+        <img src="logo.png" alt="logo dryprax" />
+        <div class="brand">
+          <h1>DRYPRAXSTUDIOS</h1>
+          <p>sites neon • rápidos • sem frescura</p>
+        </div>
+      </div>
+      <div style="margin-left:auto;display:flex;gap:8px;align-items:center;">
+        <a class="ads-link" href="ads.html" title="Gerenciar anúncios">Gerenciar anúncios</a>
+        <button class="btn" onclick="document.getElementById('catalog').scrollIntoView({behavior:'smooth'})">Ver catalogo</button>
+      </div>
+    </header>
+
+    <section class="hero" aria-label="Apresentacao">
+      <div class="hero-left">
+        <h2>Crie seu site com visual neon — rápido e barato</h2>
+        <p>Escolha o pacote que combina com você. Entrega com preview, hospedagem (opcional) e opção de domínio personalizado.</p>
+      </div>
+      <div class="cta">
+        <button class="btn" onclick="document.getElementById('prices').scrollIntoView({behavior:'smooth'})">Ver preços</button>
+      </div>
+    </section>
+
+    <!-- preços -->
+    <section id="prices" class="prices" aria-label="Planos e preços">
+      <!-- Básico -->
+      <article class="price-card" data-plan="Básico" data-price="R$ 80">
+        <div class="price-top">
+          <div class="price-badge">R$ 80</div>
+          <div>
+            <div class="price-desc">Site local — sem servidor</div>
+            <div class="price-body">Entregamos os arquivos prontos (HTML/CSS/JS). Você fica responsável por hospedar.</div>
+          </div>
+        </div>
+        <div class="price-actions">
+          <button class="buy-wp" onclick="startWhatsApp(event,'basico')">
+            <img src="zap.icon" alt="zap"/> Comprar
+          </button>
+          <button class="buy-wp" onclick="openDetails('basico')">Mais info</button>
+        </div>
+      </article>
+
+      <!-- Avançado -->
+      <article class="price-card" data-plan="Avançado" data-price="R$ 150">
+        <div class="price-top">
+          <div class="price-badge">R$ 150</div>
+          <div>
+            <div class="price-desc">Com servidor (Vercel/Netlify)</div>
+            <div class="price-body">Hospedagem em Vercel + configuração básica e deploy.</div>
+          </div>
+        </div>
+        <div class="price-actions">
+          <button class="buy-wp" onclick="startWhatsApp(event,'avancado')">
+            <img src="zap.icon" alt="zap"/> Comprar
+          </button>
+          <button class="buy-wp" onclick="openDetails('avancado')">Mais info</button>
+        </div>
+      </article>
+
+      <!-- Profissional -->
+      <article class="price-card" data-plan="Profissional" data-price="R$ 1500">
+        <div class="price-top">
+          <div class="price-badge">R$ 1500</div>
+          <div>
+            <div class="price-desc">Completo + domínio personalizado</div>
+            <div class="price-body">Site completo, domínio próprio, sem marca d'água e suporte.</div>
+          </div>
+        </div>
+        <div class="price-actions">
+          <button class="buy-wp" onclick="startWhatsApp(event,'profissional')">
+            <img src="zap.icon" alt="zap"/> Comprar
+          </button>
+          <button class="buy-wp" onclick="openDetails('profissional')">Mais info</button>
+        </div>
+      </article>
+    </section>
+
+    <!-- catalog -->
+    <section id="catalog" class="catalog" aria-label="Catalogo de sites">
+      <h3>xpratax project</h3>
+      <p style="margin:8px 0 0 0;color:rgba(230,237,243,0.7)">Catálogo rápido dos sites — clique para abrir.</p>
+
+      <div class="catalog-grid" style="margin-top:12px">
+        <a class="site-btn" href="https://xpratax.github.io/DRYTERN/" target="_blank" rel="noopener">
+          <img src="https://www.google.com/s2/favicons?domain=xpratax.github.io" alt="fav"/>
+          <div class="site-meta">
+            <strong>DRYTERN</strong>
+            <small>Portfólio / Mostruário — DRYTERN</small>
+          </div>
+        </a>
+
+        <a class="site-btn" href="https://xpratax.github.io/rul404/" target="_blank" rel="noopener">
+          <img src="https://www.google.com/s2/favicons?domain=xpratax.github.io" alt="fav"/>
+          <div class="site-meta">
+            <strong>rule404</strong>
+            <small>Página estilo aviso/restrição (projetos e experimentos)</small>
+          </div>
+        </a>
+
+        <a class="site-btn" href="https://xpratax.github.io/news-insight/" target="_blank" rel="noopener">
+          <img src="https://www.google.com/s2/favicons?domain=xpratax.github.io" alt="fav"/>
+          <div class="site-meta">
+            <strong>news-insight</strong>
+            <small>Blog / Notícias — projeto de exemplo</small>
+          </div>
+        </a>
+      </div>
+
+      <a class="ads-link" href="ads.html" style="display:inline-block;margin-top:12px">Abrir interface de anúncios (ads.html)</a>
+    </section>
+
+    <footer>
+      <small>DRYPRAXSTUDIOS — criado por xpratax • ajuste imagens: logo.png / favicon.ico / zap.icon</small>
+    </footer>
+  </div>
+
+  <script>
+    // substitua pelo seu numero no formato internacional sem +, ex: 5511999999999
+    const WA_NUMBER = "YOUR_PHONE_NUMBER";
+
+    // mensagens padrão por plano (personalize se quiser)
+    const templates = {
+      basico: "Olá, quero comprar o site Básico (R$80). Preciso de um site simples. Nome do site / ideias:",
+      avancado: "Olá, quero comprar o site Avançado (R$150). Desejo hospedagem em Vercel. Nome do site / necessidades:",
+      profissional: "Olá, quero comprar o pacote Profissional (R$1500). Quero domínio personalizado e sem marca d'água. Detalhes do site:"
+    };
+
+    function startWhatsApp(e, planKey){
+      e.stopPropagation();
+      const planText = templates[planKey] || "Olá, quero detalhes sobre o plano.";
+      // pede input do cliente para personalizar (nome do site)
+      let info = prompt("Digite o nome do site / breve descrição (será anexado à mensagem WhatsApp):", "");
+      let message = planText + (info ? " " + info : "");
+      // url encode
+      let url = "https://wa.me/" + encodeURIComponent(WA_NUMBER) + "?text=" + encodeURIComponent(message);
+      // abrir em nova guia
+      window.open(url, "_blank");
+    }
+
+    function openDetails(planKey){
+      let title = {basico:"Básico — R$80", avancado:"Avançado — R$150", profissional:"Profissional — R$1500"}[planKey] || "Detalhes";
+      let body = {
+        basico: "Entrega: arquivos estáticos (.html/.css/.js). Não inclui hospedagem.",
+        avancado: "Entrega: deploy em Vercel + documentação básica. Ajuda com DNS.",
+        profissional: "Entrega completa: design, hospedagem, domínio, sem marca d'água, suporte prioritário."
+      }[planKey] || "";
+      alert(title + "\\n\\n" + body + "\\n\\nPara comprar, clique em Comprar (ícone WhatsApp).");
+    }
+
+    // função: transforma os .price-card em botões que levam à sua interface de compra
+    document.querySelectorAll('.price-card').forEach(card=>{
+      card.addEventListener('click', (ev)=>{
+        // abre modal de detalhes ou inicia compra por botão
+        const plan = card.getAttribute('data-plan') || "Plano";
+        const price = card.getAttribute('data-price') || "";
+        if(confirm("Abrir conversa no WhatsApp para " + plan + " " + price + "?")){
+          // mapa simples: detecta se plano contém 80/1500 etc
+          let key = plan.toLowerCase().includes('prof') || price.includes('1500') ? 'profissional' :
+                    price.includes('150') ? 'avancado' : 'basico';
+          startWhatsApp(ev, key);
+        }
+      });
+    });
+
+    // Se quiser adicionar anúncios dinamicamente via ads.html, recomendamos criar um JSON local / arquivo e carregar aqui.
+  </script>
+</body>
+</html>
